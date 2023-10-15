@@ -132,11 +132,10 @@ try:
                 noDupes = list(dict.fromkeys(wordQ))
                 lexicon.extend(noDupes)
                 lexicon = list(dict.fromkeys(lexicon))
+                # idea of extending list with empty arrays comes from https://stackoverflow.com/questions/10712002/create-an-empty-list-with-certain-size-in-python
+                invIndex.extend([[]] * (len(lexicon) - len(invIndex)))
                 for word in noDupes:
-                    try:
-                        invIndex[lexicon.index(word)].append((id, wordQ.count(word)))
-                    except (ValueError, IndexError):
-                        invIndex.append([(id, wordQ.count(word))])
+                    invIndex[lexicon.index(word)].append((id, wordQ.count(word)))
                 wordQ.clear()
                 print(id)
 
